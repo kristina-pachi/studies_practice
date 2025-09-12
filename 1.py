@@ -38,7 +38,7 @@ class Character(abc.ABC):
     
     def change_lives(self, delta):
         if self.__lives <= 0:
-            print(f'{self.__name} уже в другом мир... :(')
+            print(f'{self.__name} уже в другом мире... :(')
             return self.__lives == 0
         self.__lives += delta
 
