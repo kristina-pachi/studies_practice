@@ -56,3 +56,28 @@ class  LoyaltyDiscount(OrderDiscountDecorator):
 
     def get_description(self):
         pass
+
+
+class DeliveryCostStrategy(abc.ABC):
+    @abc.abstractmethod
+    def calculate_cost(self, distance: float, weight: float):
+        pass
+
+
+class StandardDelivery(DeliveryCostStrategy):
+    def calculate_cost(self, distance: float, weight: float):
+        pass
+
+
+class ExpressDelivery(DeliveryCostStrategy):
+    def calculate_cost(self, distance: float, weight: float):
+        pass
+
+
+class FreeDeliveryThreshold(DeliveryCostStrategy):
+    def calculate_cost(self, distance: float, weight: float):
+        pass
+
+
+class OrderProcessor:
+    pass
