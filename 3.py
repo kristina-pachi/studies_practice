@@ -29,3 +29,38 @@ label2 = tk.Label(
 label2.pack(pady=10)
 entry = tk.Entry(root, width=30) # Ширина поля ввода
 entry.pack(pady=5)
+
+label3 = tk.Label(
+    root,
+    text="У тебя много друзей?",
+    font=("Arial", 10), # Установка шрифта и размера
+    fg="red", # Цвет текста (foreground)
+)
+label3.pack(anchor="w", padx=20, pady=10)
+
+
+q1 = tk.StringVar() # Переменная для хранения выбранного значения
+q1.set("a")
+
+radio1 = tk.Radiobutton(
+    root,
+    text="Немного, но каждый на вес золота",
+    variable=q1,
+    value="a"
+)
+radio2 = tk.Radiobutton(
+    root,
+    text="Мне кажется, нет никого, кого бы я мог назвать другом",
+    variable=q1,
+    value="b"
+)
+radio3 = tk.Radiobutton(
+    root,
+    text="Да, так сразу и не сосчитаешь",
+    variable=q1,
+    value="c"
+)
+radio1.pack(anchor="w", padx=20, pady=5)
+radio2.pack(anchor="w", padx=20, pady=5)
+radio3.pack(anchor="w", padx=20, pady=5)
+
