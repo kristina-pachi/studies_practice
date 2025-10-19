@@ -19,3 +19,13 @@ label1 = tk.Label(
     bg="lightpink" # Цвет фона (background)
 )
 label1.pack(pady=20)
+
+label2 = tk.Label(
+    root,
+    text="Введите ваше имя:",
+    font=("Arial", 10), # Установка шрифта и размера
+    fg="red", # Цвет текста (foreground)
+)
+label2.pack(pady=10)
+entry = tk.Entry(root, width=30) # Ширина поля ввода
+entry.pack(pady=5)
