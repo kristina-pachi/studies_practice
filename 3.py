@@ -64,3 +64,38 @@ radio1.pack(anchor="w", padx=20, pady=5)
 radio2.pack(anchor="w", padx=20, pady=5)
 radio3.pack(anchor="w", padx=20, pady=5)
 
+label4 = tk.Label(
+    root,
+    text="Если булочка, то обязательно...",
+    font=("Arial", 10), # Установка шрифта и размера
+    fg="red", # Цвет текста (foreground)
+)
+label4.pack(anchor="w", padx=20, pady=10)
+
+
+q2 = tk.StringVar() # Переменная для хранения выбранного значения
+q2.set("a")
+
+radio1 = tk.Radiobutton(
+    root,
+    text="Со свежесваренным кофе",
+    variable=q2,
+    value="a"
+)
+radio2 = tk.Radiobutton(
+    root,
+    text="С апельсиновым соком – и обязательно свежевыжатым",
+    variable=q2,
+    value="b"
+)
+radio3 = tk.Radiobutton(
+    root,
+    text="С горячим чаем",
+    variable=q2,
+    value="c"
+)
+radio1.pack(anchor="w", padx=20, pady=5)
+radio2.pack(anchor="w", padx=20, pady=5)
+radio3.pack(anchor="w", padx=20, pady=5)
+
+root.mainloop()
