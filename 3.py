@@ -98,4 +98,75 @@ radio1.pack(anchor="w", padx=20, pady=5)
 radio2.pack(anchor="w", padx=20, pady=5)
 radio3.pack(anchor="w", padx=20, pady=5)
 
+label5 = tk.Label(
+    root,
+    text="Какой жанр фильмов тебе нравится больше?",
+    font=("Arial", 10), # Установка шрифта и размера
+    fg="red", # Цвет текста (foreground)
+)
+label5.pack(anchor="w", padx=20, pady=10)
+
+
+q3 = tk.StringVar() # Переменная для хранения выбранного значения
+q3.set("a")
+
+radio1 = tk.Radiobutton(
+    root,
+    text="Детектив",
+    variable=q3,
+    value="a"
+)
+radio2 = tk.Radiobutton(
+    root,
+    text="Мелодрама",
+    variable=q3,
+    value="b"
+)
+radio3 = tk.Radiobutton(
+    root,
+    text="Комедия",
+    variable=q3,
+    value="c"
+)
+radio1.pack(anchor="w", padx=20, pady=5)
+radio2.pack(anchor="w", padx=20, pady=5)
+radio3.pack(anchor="w", padx=20, pady=5)
+
+label6 = tk.Label(
+    root,
+    text="Какой стиль одежды тебе нравится?",
+    font=("Arial", 10), # Установка шрифта и размера
+    fg="red", # Цвет текста (foreground)
+)
+label6.pack(anchor="w", padx=20, pady=10)
+
+
+q4 = tk.StringVar() # Переменная для хранения выбранного значения
+q4.set("a")
+
+radio1 = tk.Radiobutton(
+    root,
+    text="Строгая классика",
+    variable=q4,
+    value="a"
+)
+radio2 = tk.Radiobutton(
+    root,
+    text="Я за комфорт и практически не вылезаю из оверсайза",
+    variable=q4,
+    value="b"
+)
+radio3 = tk.Radiobutton(
+    root,
+    text="Люблю следовать трендам",
+    variable=q4,
+    value="c"
+)
+radio1.pack(anchor="w", padx=20, pady=5)
+radio2.pack(anchor="w", padx=20, pady=5)
+radio3.pack(anchor="w", padx=20, pady=5)
+
+button = tk.Button(root, text="Отправить", command=result)
+button.pack(pady=5)
+
 root.mainloop()
