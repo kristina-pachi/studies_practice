@@ -1,7 +1,25 @@
 import tkinter as tk
+import abc
 
-def show_point(x, y):
-    return canvas.create_rectangle(x+50, 350-y, x+51, 349-y, outline="blue", width=2)
+class DataPointVisualizer(abc.ABC):
+    @abc.abstractmethod
+    def show_point(self, x, y):
+        pass
+
+
+class SimpleDataPointVisualizer(DataPointVisualizer):
+    def show_point(self, x, y):
+        canvas.create_rectangle(x+50, 350-y, x+51, 349-y, outline="blue", width=2)
+
+
+class PointDecorator(DataPointVisualizer, abc.ABC):
+    def __init__(self, decorated_point: DataPointVisualizer):
+        self._decorated_point = decorated_point
+
+    @abc.abstractmethod
+    def show_point(self, x, y):
+        pass
+
 
 root = tk.Tk()
 root.title("Пример Canvas: Рисование фигур")
@@ -23,7 +41,13 @@ message_entry_x.insert(0, "Введите абсциссу точки")
 message_entry_y = tk.Entry(root, width=40)
 message_entry_y.pack(pady=10)
 message_entry_y.insert(0, "Введите ординату точки")
-button = tk.Button(root, text="Отобразить точку", command=lambda: show_point(int(message_entry_x.get()), int(message_entry_y.get())))
+button = tk.Button(
+    root, text="Отобразить точку",
+    command=lambda: show_point(
+        int(message_entry_x.get()),
+        int(message_entry_y.get())
+        )
+    )
 button.pack(pady=5)
 
 root.mainloop()
