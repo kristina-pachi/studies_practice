@@ -1,7 +1,7 @@
 import tkinter as tk
 
 def show_point(x, y):
-    return canvas.create_rectangle(x+50, 350 - y, x+51, 349 - y, outline="blue", width=2)
+    return canvas.create_rectangle(x+50, 350-y, x+51, 349-y, outline="blue", width=2)
 
 root = tk.Tk()
 root.title("Пример Canvas: Рисование фигур")
