@@ -3,13 +3,24 @@ import abc
 
 class DataPointVisualizer(abc.ABC):
     @abc.abstractmethod
-    def show_point(self, x, y):
+    def show_point(self, canvas):
         pass
 
 
 class SimpleDataPointVisualizer(DataPointVisualizer):
-    def show_point(self, x, y):
-        canvas.create_rectangle(x+50, 350-y, x+51, 349-y, outline="blue", width=2)
+    def __init__(self, x, y):
+        self._color = "blue"
+        self._width = 2
+        self._lable = None
+        self._x = x
+        self._y = y
+
+    def show_point(self, canvas):
+        return canvas.create_rectangle(
+            self._x+50, 350-self._y,
+            self._x+51, 349-self._y,
+            outline=self._color, width=self._width
+        )
 
 
 class PointDecorator(DataPointVisualizer, abc.ABC):
@@ -17,9 +28,51 @@ class PointDecorator(DataPointVisualizer, abc.ABC):
         self._decorated_point = decorated_point
 
     @abc.abstractmethod
-    def show_point(self, x, y):
+    def show_point(self, canvas):
         pass
 
+
+class LabelDecorator(PointDecorator):
+    
+    def show_point(self, canvas):
+        point_id = self._decorated_point.show_point(canvas)
+        canvas.create_text(self._decorated_point._x + 55, 350 - self._decorated_point._y,
+                           text=f"({self._decorated_point._x}, {self._decorated_point._y})",
+                           anchor="w", font=("Arial", 9), fill="black")
+        return point_id
+
+
+class TooltipDecorator(PointDecorator):
+    def show_point(self, canvas):
+        point_id = self._decorated_point.show_point(canvas)
+        tooltip = tk.Label(canvas, text=f"Точка: ({self._decorated_point._x}, {self._decorated_point._y})",
+                           bg="lightyellow", relief="solid", bd=1, font=("Arial", 8))
+        tooltip.place_forget()
+
+        def on_enter(event):
+            tooltip.place(x=event.x + 10, y=event.y - 10)
+
+        def on_leave(event):
+            tooltip.place_forget()
+
+        canvas.tag_bind(point_id, "<Enter>", on_enter)
+        canvas.tag_bind(point_id, "<Leave>", on_leave)
+        return point_id
+
+
+class HighlightDecorator(PointDecorator):
+    def show_point(self, canvas):
+        point_id = self._decorated_point.show_point(canvas)
+
+        def on_enter(event):
+            canvas.itemconfig(point_id, fill="red", outline="red")
+
+        def on_leave(event):
+            canvas.itemconfig(point_id, fill="blue", outline="blue")
+
+        canvas.tag_bind(point_id, "<Enter>", on_enter)
+        canvas.tag_bind(point_id, "<Leave>", on_leave)
+        return point_id  
 
 root = tk.Tk()
 root.title("Пример Canvas: Рисование фигур")
