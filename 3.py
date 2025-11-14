@@ -51,7 +51,7 @@ root.geometry("600x800")
 # Заголовок
 label1: tk.Label = tk.Label(
     root,
-    text="Какая вы булочка? (^ ω ^)",
+    text="Какая ты булочка? (^ ω ^)",
     font=("Arial", 18),
     fg="red",
     bg="lightpink"
