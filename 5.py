@@ -15,18 +15,31 @@ def choose_file():
     )
     if filepath:
         filename = os.path.basename(filepath)
-        messagebox.showinfo("Выбранный файл", f"Файл выбран: {filename}")
+        print("Выбранный файл", f"Файл выбран: {filename}")
     else:
         messagebox.showwarning("Внимание", "Пожалуйста, выбирите текстовый файл.")
 
 
 def result():
     if not filepath: 
-        messagebox.showwarning("Внимание", "Пожалуйста, выбирите текстовый файл.")
+        return messagebox.showwarning("Внимание", "Пожалуйста, выбирите текстовый файл.")
     with open(filepath, "r", encoding="utf-8") as f:
-        count_lines = len(f.readlines())
-        print(count_lines)
-        messagebox.showinfo("Инфо", f"Количество строк: {count_lines}")
+        text = f.read()
+        if text:
+            count_lines = text.count('\n') + 1
+            count_items = len(text)
+            count_words = len(text.split())
+            return messagebox.showinfo(
+                "Инфо",
+                f"Количество строк: {count_lines}\n"
+                f"Количество символов: {count_items}\n"
+                f"Количество слов: {count_words}"
+            )
+        return messagebox.showinfo(
+            "Инфо",
+            f"Ваш файл - '{os.path.basename(filepath)}' пуст :("
+        )
+        
 
 # --- Интерфейс ---
 root: tk.Tk = tk.Tk()
