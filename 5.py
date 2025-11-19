@@ -7,22 +7,32 @@ from tkinter import messagebox, filedialog
 
 filepath = None
 
-def choose_file():
+def choose_file(i):
     global filepath
-    filepath = filedialog.askopenfilename(
-        title="Выберите файл",
-        filetypes=[("Текстовые файлы", "*.txt")]
-    )
+    if i =='a':
+        filename = entry.get()
+        for root, dirs, files in os.walk("C:/"):
+            if filename in files:
+                filepath = os.path.join(root, filename)
+
+    elif i =='b':
+        filepath = filedialog.askopenfilename(
+            title="Выберите файл",
+            filetypes=[("Текстовые файлы", "*.txt")]
+        )
     if filepath:
         filename = os.path.basename(filepath)
         print("Выбранный файл", f"Файл выбран: {filename}")
     else:
-        messagebox.showwarning("Внимание", "Пожалуйста, выбирите текстовый файл.")
+        if i =='a':
+            messagebox.showwarning("Внимание", "Файл не найден")
+        else:
+            messagebox.showwarning("Внимание", "Пожалуйста, выбирите текстовый файл.")
 
 
 def result():
     if not filepath: 
-        return messagebox.showwarning("Внимание", "Пожалуйста, выбирите текстовый файл.")
+        return messagebox.showwarning("Внимание", "Пожалуйста, выбирите текстовый файл через обзор или поиск.")
     with open(filepath, "r", encoding="utf-8") as f:
         text = f.read()
         if text:
@@ -37,34 +47,42 @@ def result():
             )
         return messagebox.showinfo(
             "Инфо",
-            f"Ваш файл - '{os.path.basename(filepath)}' пуст :("
+            f"Ваш файл '{os.path.basename(filepath)}' пуст :("
         )
         
 
 # --- Интерфейс ---
 root: tk.Tk = tk.Tk()
 root.title("Статистика по файлу")
-root.geometry("300x250")
+root.geometry("350x350")
+
+label1: tk.Label = tk.Label(root, text="Введите имя \nтекстового файла вручную:", font=("Arial", 14), fg="red")
+label1.pack(pady=10)
+entry: tk.Entry = tk.Entry(root, width=30)
+entry.pack(pady=5)
+
+button1: tk.Button = tk.Button(root, text="Поиск по имени", command=lambda: choose_file('a'))
+button1.pack(pady=5)
 
 # Выбор файла
-label: tk.Label = tk.Label(root, text="Выбирите текстовый файл:", font=("Arial", 14), fg="blue")
-label.pack(pady=10)
+label2: tk.Label = tk.Label(root, text="Выбирите текстовый файл:", font=("Arial", 14), fg="blue")
+label2.pack(pady=10)
 
 
 # Кнопка
-button: tk.Button = tk.Button(root, text="Обзор файлов", command=choose_file)
-button.pack(pady=5)
+button2: tk.Button = tk.Button(root, text="Обзор файлов", command=lambda: choose_file('b'))
+button2.pack(pady=5)
 
 # Вопрос
-label: tk.Label = tk.Label(
+label3: tk.Label = tk.Label(
     root,
     text="Хотите узнать, сколько\n строк, слов и символов в вашем файле?",
-    font=("Arial", 10),
-    fg="black")
-label.pack(pady=20)
+    font=("Arial", 12),
+    fg="green")
+label3.pack(pady=20)
 
 # Кнопка
-button: tk.Button = tk.Button(root, text="Хочу!", command=result)
-button.pack(pady=5)
+button3: tk.Button = tk.Button(root, text="Хочу!", command=result)
+button3.pack(pady=5)
 
 root.mainloop()
