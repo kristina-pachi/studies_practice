@@ -79,7 +79,7 @@ label3: tk.Label = tk.Label(
     text="Хотите узнать, сколько\n строк, слов и символов в вашем файле?",
     font=("Arial", 12),
     fg="green")
-label3.pack(pady=20)
+label3.pack(pady=10)
 
 # Кнопка
 button3: tk.Button = tk.Button(root, text="Хочу!", command=result)
