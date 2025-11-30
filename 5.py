@@ -8,12 +8,12 @@ from tkinter import messagebox, filedialog
 filepath = None
 
 def choose_file(i):
-    global filepath
     if i =='a':
         filename = entry.get()
         for root, dirs, files in os.walk("C:/"):
             if filename in files:
                 filepath = os.path.join(root, filename)
+            filepath = None
 
     elif i =='b':
         filepath = filedialog.askopenfilename(
