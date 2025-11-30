@@ -1,0 +1,13 @@
+{
+    "total_revenue": 72692,
+    "best_selling_product": {
+        "name": "Potatoes",
+        "quantity": 72,
+        "revenue": 2177
+    },
+    "most_profitable_product": {
+        "name": "Salmon",
+        "quantity": 10,
+        "revenue": 9475
+    }
+}
